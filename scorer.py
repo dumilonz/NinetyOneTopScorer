@@ -1,12 +1,20 @@
 import sys
 
 INPUT_DIRECTORY = "input_data"
+CELL_SEPARATOR = ","
+NEW_LINE = "\n\n"
 
 # get last instance of ,
 # get score
-# save score as a dictionary
 
 # assumption that scores are between 0 & 100 and integer
+# assumption that there is no ',' in names
+# assumption that the line spacing in the example
+
+def clean_output(scorers, score):
+    sorted_scorers = sorted(scorers)
+    clean_scorers = f"{NEW_LINE}".join(sorted_scorers).replace(CELL_SEPARATOR, " ")
+    return f"{clean_scorers}{NEW_LINE}Score: {score}{NEW_LINE}"
 
 def sort_rows(rows):
     max_score = 0
@@ -32,8 +40,9 @@ def main(args):
                 rows = str_data.split("\n")
                 if rows[0].endswith("Score"):
                     rows.pop(0)
-                output = sort_rows(rows)
-                print(output)
+                scorer, score = sort_rows(rows)
+                output = clean_output(scorer, score)
+                sys.stdout.write(output)
         except FileNotFoundError:
             print(f"Error: File not found. Please check the file path. (..{file_path})")
     except IndexError:
