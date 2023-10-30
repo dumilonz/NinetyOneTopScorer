@@ -10,22 +10,18 @@ INPUT_DIRECTORY = "input_data"
 
 def sort_rows(rows):
     max_score = 0
-    max_scorer = ""
+    max_scorer = []
     for row in rows:
-        #print(row)
         if ',' in row:
-            score_separator = row.rfind(',')
+            score_separator = row.rfind(CELL_SEPARATOR)
             score = int(row[score_separator + 1 :])
             if score > max_score:
                 max_score = score
-                max_scorer = row[:score_separator]
+                max_scorer = [row[:score_separator]]
             elif score == max_score:
                 also_max = row[:score_separator]
-                if max_scorer < also_max:
-                    max_scorer += f"\n{also_max}"
-                else:
-                    max_scorer = f"{also_max}\n{max_scorer}"
-    return max_scorer
+                max_scorer.append(also_max)
+    return max_scorer, max_score
 
 def main(args):
     try:
