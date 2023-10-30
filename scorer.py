@@ -44,9 +44,9 @@ def main(args):
                 output = clean_output(scorer, score)
                 sys.stdout.write(output)
         except FileNotFoundError:
-            print(f"Error: File not found. Please check the file path. (..{file_path})")
+            sys.stdout.write(f"Error: File not found. Please check the file path. (..{file_path})")
     except IndexError:
-        print("Error: Provide file name as srgument when running script")
+        sys.stdout.write("Error: Provide file name as argument when running script")
 
 
 if __name__ == "__main__":
